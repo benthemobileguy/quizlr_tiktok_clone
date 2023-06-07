@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/features/home/domain/entities/following.dart';
 
 class FlashQuestionDetails extends StatelessWidget {
+  final Following following;
   const FlashQuestionDetails({
-    super.key,
+    super.key, required this.following,
   });
 
   @override
@@ -14,17 +16,17 @@ class FlashQuestionDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'What was the name of the Act that created federal subsidies for the construction of a transcontinental railroad?',
+          Text(
+            following.flashcardFront!,
             textAlign: TextAlign.start,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 18.5,
               height: 1.2,
               color: Colors.white,
             ),
           ),
-           Container(
+          Container(
             margin: const EdgeInsets.symmetric(vertical: 20),
             width: 286,
             height: 0,
@@ -39,7 +41,7 @@ class FlashQuestionDetails extends StatelessWidget {
               ),
             ),
           ),
-           const Text(
+          const Text(
             'Answer',
             style: TextStyle(
               fontWeight: FontWeight.w800,
@@ -50,7 +52,7 @@ class FlashQuestionDetails extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Text(
-            'With the rapid settlement in western territories, Congress decided that an efficient railroad transport to the Pacific coast would be beneficial and passed the Pacific Railway Act of 1862 during the Civil War to promote easier western transportation for the North.',
+            following.flashcardBack!,
             textAlign: TextAlign.start,
             style: TextStyle(
               fontWeight: FontWeight.w400,
@@ -84,8 +86,7 @@ class FlashQuestionDetails extends StatelessWidget {
       ),
     );
   }
-  
- 
+
   Widget buildButton(String text, Color color) {
     return Container(
       margin: const EdgeInsets.only(right: 10),

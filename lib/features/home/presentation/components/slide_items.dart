@@ -4,7 +4,7 @@ import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
 import 'package:quizlr_tiktok_clone/core/utils/toast.dart';
 import 'package:quizlr_tiktok_clone/features/home/domain/entities/for_you.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/flash_question.dart';
-import 'package:quizlr_tiktok_clone/features/home/presentation/components/header.dart';
+import 'package:quizlr_tiktok_clone/features/home/presentation/components/flash_question_details.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/left_pane.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/right_pane.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/cubit/following_cubit.dart';
@@ -21,6 +21,7 @@ class SlideItems extends StatefulWidget {
     required this.shares,
     required this.profileImg,
     required this.flipImg,
+    required this.tabController,
   }) : super(key: key);
 
   final Size size;
@@ -30,6 +31,7 @@ class SlideItems extends StatefulWidget {
   final String shares;
   final String profileImg;
   final String flipImg;
+  final TabController tabController;
 
   @override
   State<SlideItems> createState() => _SlideItemsState();
@@ -38,136 +40,118 @@ class SlideItems extends StatefulWidget {
 class _SlideItemsState extends State<SlideItems>
     with SingleTickerProviderStateMixin {
   bool isShowingPlaying = false;
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
-  }
+  bool isFlashQuestionTapped = false;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: SizedBox(
-        width: widget.size.width,
-        height: widget.size.height,
-        child: Stack(
-          children: [
-            BlocBuilder<FollowingCubit, FollowingCubitState>(
-              builder: (context, state) {
-                if (state is FollowingCubitLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  );
-                } else {
-                  return TabBarView(
-                    controller: _tabController,
-                    children: [
-                      FlashQuestion(
+    return SizedBox(
+      width: widget.size.width,
+      height: widget.size.height,
+      child: Stack(
+        children: [
+          BlocBuilder<FollowingCubit, FollowingCubitState>(
+            builder: (context, state) {
+              if (state is FollowingCubitLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                );
+              } else {
+                return TabBarView(
+                  controller: widget.tabController,
+                  children: [
+                   !isFlashQuestionTapped? InkWell(
+                      onTap: () {
+                        setState(() {
+                          isFlashQuestionTapped = !isFlashQuestionTapped;
+                        });
+                      },
+                      child: FlashQuestion(
                         question: ((state as FollowingCubitInitial)
                             .following
                             .flashcardFront
                             .toString()),
                       ),
-                      BlocBuilder<ForYouCubit, ForYouState>(
-                        builder: (context, state) {
-                          if (state is ForYouCubitLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            );
-                          } else {
-                            final options =
-                                (state as ForYouCubitInitial).forYou.options;
-                            return Container(
-                              padding:
-                                  const EdgeInsets.only(left: 20, right: 60),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    (state).forYou.question.toString(),
-                                    textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18.5,
-                                      height: 1.2,
-                                      color: Colors.white,
-                                    ),
+                    ): FlashQuestionDetails(
+                      following: ((state as FollowingCubitInitial)
+                            .following)),
+                    BlocBuilder<ForYouCubit, ForYouState>(
+                      builder: (context, state) {
+                        if (state is ForYouCubitLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          );
+                        } else {
+                          final options =
+                              (state as ForYouCubitInitial).forYou.options;
+                          return Container(
+                            padding:
+                                const EdgeInsets.only(left: 20, right: 60),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  (state).forYou.question.toString(),
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18.5,
+                                    height: 1.2,
+                                    color: Colors.white,
                                   ),
-                                  SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.15),
-                                  Column(
-                                    children: options != null
-                                        ? options.map((option) {
-                                            return buildClickableCard(
-                                                (state).forYou.id.toString(),
-                                                option,
-                                                false);
-                                          }).toList()
-                                        : [],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                }
-              },
-            ),
-            SizedBox(
-              width: widget.size.width,
-              height: widget.size.height,
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    HeaderHomePage(
-                      tabController: _tabController,
+                                ),
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                            0.15),
+                                Column(
+                                  children: options != null
+                                      ? options.map((option) {
+                                          return buildClickableCard(
+                                              (state).forYou.id.toString(),
+                                              option,
+                                              false);
+                                        }).toList()
+                                      : [],
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
                     ),
-                    Flexible(
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          LeftPanel(
-                            size: widget.size,
-                            name: widget.name,
-                            content: 'Topic 5.2: Manifest Destiny',
-                          ),
-                          RightPanel(
-                            size: widget.size,
-                            comments: widget.comments,
-                            likes: widget.likes,
-                            shares: widget.shares,
-                            profileImg: widget.profileImg,
-                            flipImg: widget.flipImg,
-                          ),
-                        ],
-                      ),
-                    )
                   ],
-                ),
-              ),
-            ),
-            //const FlashQuestion(),
-            // const FlashQuestionDetails(),
-          ],
-        ),
+                );
+              }
+            },
+          ),
+          SizedBox(
+            width: widget.size.width,
+            height: widget.size.height,
+            child: SafeArea(
+                child: Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    LeftPanel(
+                      size: widget.size,
+                      name: widget.name,
+                      content: 'Topic 5.2: Manifest Destiny',
+                    ),
+                    RightPanel(
+                      size: widget.size,
+                      comments: widget.comments,
+                      likes: widget.likes,
+                      shares: widget.shares,
+                      profileImg: widget.profileImg,
+                      flipImg: widget.flipImg,
+                    ),
+                  ],
+                )),
+          ),
+        ],
       ),
     );
   }
