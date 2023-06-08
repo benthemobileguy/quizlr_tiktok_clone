@@ -1,12 +1,21 @@
-# TIKTOK CLONE APP
+# QUIZ-LIKE TIKTOK CLONE APP
 
- This is a Crossover task that shows the implementation the “Home” screen of a TikTok clone for education.
+ This is a Crossover task that shows the implementation the “Home” screen of a TikTok clone for education purpose.
+
+
+https://github.com/benthemobileguy/quizlr_tiktok_clone/assets/26816781/36951f51-9a2d-4c96-9a22-7580e072fa28
+
 
 |For You|Following|Answer|
 |---|---|-----------------------------------------------------------------------------------------------------------|
 |![Following](screenshots/following.png)|![For You](screenshots/for_you.png)|![Answer](screenshots/answer.png)|
 
-## Features
+## Code Features
+
+1. Bloc and Cubits for Managing States
+2. Clean Architecture for Modularization
+
+## App Features
 
 1. Showing content for the “Following” and “For you” sections of the “Home” screen
 
