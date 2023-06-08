@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/string_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 import 'package:quizlr_tiktok_clone/features/home/domain/entities/following.dart';
 
 class FlashQuestionDetails extends StatelessWidget {
@@ -11,23 +14,25 @@ class FlashQuestionDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 20, right: 60),
+      padding: const EdgeInsets.only(left: AppPadding.p20, right: AppPadding.p60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            following.flashcardFront!,
-            textAlign: TextAlign.start,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 18.5,
-              height: 1.2,
-              color: Colors.white,
+          Flexible(
+            child: Text(
+              following.flashcardFront!,
+              textAlign: TextAlign.start,
+              style: const TextStyle(
+                fontWeight: FontWeightManager.regular,
+                fontSize: FontSize.s18,
+                height: 1.2,
+                color: Palette.white,
+              ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.symmetric(vertical:AppMargin.m20),
             width: 286,
             height: 0,
             child: const DecoratedBox(
@@ -42,31 +47,31 @@ class FlashQuestionDetails extends StatelessWidget {
             ),
           ),
           const Text(
-            'Answer',
+            StringManager.answer,
             style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 12.5,
+              fontSize: FontSize.s13,
               height: 1.4,
               color: Palette.green,
             ),
           ),
-          const SizedBox(height: 3),
+          const SizedBox(height: AppMargin.m3),
           Text(
             following.flashcardBack!,
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 18.5,
+              fontWeight: FontWeightManager.regular,
+              fontSize: FontSize.s18,
               height: 25.06 / 21,
               color: Colors.white.withOpacity(0.7),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: AppMargin.m30),
           Text(
-            'How well did you know this?',
+            StringManager.quesEnquiry,
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 12.5,
+              fontSize: FontSize.s13,
               height: 1.4,
               color: Colors.white.withOpacity(0.6),
             ),
@@ -101,7 +106,7 @@ class FlashQuestionDetails extends StatelessWidget {
           text,
           style: const TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 17,
+            fontSize: FontSize.s17,
             height: 20 / 17,
             color: Colors.white,
           ),

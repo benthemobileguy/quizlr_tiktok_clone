@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/string_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 
 class RightPanel extends StatelessWidget {
   const RightPanel({
@@ -38,27 +41,27 @@ class RightPanel extends StatelessWidget {
                     profileImg: profileImg,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: AppPadding.p10,
                   ),
                   getIcon(
-                    icon: "heart",
+                    icon: StringManager.heart,
                     count: comments,
-                    size: 28,
+                    size: AppSize.s28,
                   ),
                   getIcon(
-                    icon: "comments",
+                    icon: StringManager.comments,
                     count: shares,
-                    size: 28,
+                    size: AppSize.s28,
                   ),
                   getIcon(
-                    icon: "union",
+                    icon: StringManager.union,
                     count: shares,
-                    size: 28,
+                    size: AppSize.s28,
                   ),
                   getIcon(
-                    icon: "bookmark",
+                    icon: StringManager.bookmark,
                     count: shares,
-                    size: 28,
+                    size: AppSize.s28,
                   ),
                    getFlipButton(
                     flipImg: flipImg,
@@ -75,39 +78,39 @@ class RightPanel extends StatelessWidget {
   getIcon({icon, double? size, count}) {
     return Column(
       children: [
-        const SizedBox(height: 10),
+        const SizedBox(height: AppMargin.m10),
         SvgPicture.asset(
-        'assets/images/$icon.svg', // Replace with your SVG asset path
+        'assets/images/$icon.svg', 
         height: size,
         width: size,
       ),
-        const SizedBox(height: 5),
+        const SizedBox(height: AppPadding.p4),
         Text(
           count,
           style:
               const TextStyle(
-                fontWeight: FontWeight.w500, 
-              fontSize: 12, 
+                fontWeight: FontWeightManager.medium, 
+              fontSize: FontSize.s12, 
               color: Colors.white),
         ),
-         const SizedBox(height: 10),
+         const SizedBox(height: AppPadding.p10),
       ],
     );
   }
 
  Widget getProfile({String? profileImg}) {
   return profileImg!.isNotEmpty ? IconButton(
-    iconSize: 50,
+    iconSize: AppSize.s50,
     icon: Image.network(
       profileImg,
     ),
     onPressed: () {},
   ): Container(
-    height: 50,
-    width: 50,
+    height: AppMargin.m50,
+    width: AppMargin.m50,
     decoration: BoxDecoration(
       color: Palette.background1,
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(AppSize.s50),
     ),
   );
 }
@@ -116,7 +119,7 @@ class RightPanel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
-          iconSize: 38,
+          iconSize: AppSize.s40,
           icon: Image.asset(
             flipImg
           ),
@@ -125,12 +128,12 @@ class RightPanel extends StatelessWidget {
           },
         ),
         const Text(
-          'Flip',
+          StringManager.flip,
           style:
               TextStyle(
-                fontWeight: FontWeight.w500, 
-              fontSize: 12, 
-              color: Colors.white),
+                fontWeight: FontWeightManager.medium, 
+              fontSize: FontSize.s12, 
+              color: Palette.white),
         ),
       ],
     );

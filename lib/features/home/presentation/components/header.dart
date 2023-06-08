@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/string_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class HeaderHomePage extends StatefulWidget {
@@ -23,16 +27,16 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 30),
-      color: Colors.black,
+      padding: const EdgeInsets.only(bottom: AppPadding.p30),
+      color: Palette.black,
       child: Row(
         children: [
-          const SizedBox(width: 4),
+          const SizedBox(width: AppSize.s4),
           Icon(
             Icons.timer,
             color: Colors.white.withOpacity(0.6),
           ),
-          const SizedBox(width: 3),
+          const SizedBox(width: AppPadding.p3),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.20,
             child: Opacity(
@@ -48,53 +52,53 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w400,
-                      fontSize: 16,
+                      fontSize: FontSize.s16,
                     ),
                   );
                 },
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppMargin.m8),
           Expanded(
             child: DefaultTabController(
               length: 2, // Number of tabs
               child: TabBar(
                 controller: widget.tabController,
                 indicatorSize: TabBarIndicatorSize.label,
-                indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                 indicator: const UnderlineTabIndicator(
                   borderSide: BorderSide(
-                    width: 4,
-                    color: Colors.white,
+                    width: AppPadding.p4,
+                    color: Palette.white,
                   ),
                   insets: EdgeInsets.symmetric(
                       horizontal: 2), // Desired insets for the indicator
                 ),
                 labelStyle: const TextStyle(
-                  fontSize: 16,
+                  fontSize: FontSize.s16,
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedLabelStyle: const TextStyle(
-                  fontSize: 16,
+                  fontSize: FontSize.s16,
                   fontWeight: FontWeight.normal,
                 ),
                 tabs: const [
                   Tab(
                     child: Text(
-                      'Following',
+                      StringManager.tab1Title,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16.5,
+                        fontSize:FontSize.s16,
                       ),
                     ),
                   ),
                   Tab(
                     child: Text(
-                      'For You',
+                      StringManager.tab2Title,
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.5,
+                        color: Palette.white,
+                        fontSize: FontSize.s16,
                       ),
                     ),
                   ),
@@ -106,8 +110,8 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
             onPressed: () {},
             icon: const Icon(
               Icons.search,
-              size: 28,
-              color: Colors.white,
+              size: AppSize.s28,
+              color: Palette.white,
             ),
           ),
         ],

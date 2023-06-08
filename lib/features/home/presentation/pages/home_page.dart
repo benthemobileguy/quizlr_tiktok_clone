@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/image_paths.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/header.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/slide_items.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/cubit/following_cubit.dart';
@@ -16,13 +19,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  static const int tabsLength = 2;
   late TabController tabController;
   late final Controller controller;
   int initialPageList = 1;
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: tabsLength , vsync: this);
     fetchData(context);
     controller = Controller()
       ..addListener((event) {
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage>
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Palette.black,
       ),
       body: BlocBuilder<FollowingCubit, FollowingCubitState>(
         builder: (context, state) {
@@ -67,9 +71,7 @@ class _HomePageState extends State<HomePage>
                 Expanded(
                   child: TikTokStyleFullPageScroller(
                     controller: controller,
-                    swipePositionThreshold: 0.2,
-                    swipeVelocityThreshold: 2000,
-                    animationDuration: const Duration(milliseconds: 400),
+                    swipePositionThreshold: AppSize.s0_2,
                     builder: (BuildContext context, int index) {
                       return SlideItems(
                         size: size,
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage>
                                 state.following.user != null)
                             ? state.following.user!.avatar.toString()
                             : '',
-                        flipImg: 'assets/images/flip.png',
+                        flipImg: ImagePaths.flipImg,
                       );
                     },
                     contentSize: initialPageList + 1,
@@ -97,12 +99,12 @@ class _HomePageState extends State<HomePage>
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Palette.black,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontSize: 10),
-        unselectedLabelStyle: const TextStyle(fontSize: 10),
+        selectedItemColor: Palette.white,
+        unselectedItemColor: const Color.fromARGB(255, 158, 158, 158),
+        selectedLabelStyle: const TextStyle(fontSize: FontSize.s10),
+        unselectedLabelStyle: const TextStyle(fontSize: FontSize.s10),
         currentIndex: 0,
         onTap: (int index) {},
         items: const [

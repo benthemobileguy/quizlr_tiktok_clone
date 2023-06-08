@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/string_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 import 'package:quizlr_tiktok_clone/core/utils/toast.dart';
 import 'package:quizlr_tiktok_clone/features/home/domain/entities/for_you.dart';
 import 'package:quizlr_tiktok_clone/features/home/presentation/components/flash_question.dart';
@@ -54,7 +57,7 @@ class _SlideItemsState extends State<SlideItems>
               if (state is FollowingCubitLoading) {
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: Colors.white,
+                    color: Palette.white,
                   ),
                 );
               } else {
@@ -97,10 +100,10 @@ class _SlideItemsState extends State<SlideItems>
                                   (state).forYou.question.toString(),
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18.5,
+                                    fontWeight:FontWeight.w400,
+                                    fontSize: FontSize.s18,
                                     height: 1.2,
-                                    color: Colors.white,
+                                    color: Palette.white,
                                   ),
                                 ),
                                 SizedBox(
@@ -134,11 +137,11 @@ class _SlideItemsState extends State<SlideItems>
             child: SafeArea(
                 child: Row(
                   children: [
-                    const SizedBox(width: 16),
+                    const SizedBox(width: AppMargin.m16),
                     LeftPanel(
                       size: widget.size,
                       name: widget.name,
-                      content: 'Topic 5.2: Manifest Destiny',
+                      content: StringManager.leftPanelText,
                     ),
                     RightPanel(
                       size: widget.size,
@@ -167,30 +170,31 @@ class _SlideItemsState extends State<SlideItems>
             final answer = (state as RevealAnswerInitial).answer;
             correctAnswer = 'Answer: ${answer.correctOptions?[0].answer}';
             ToastUtils.showToast(
-              message: correctAnswer ?? 'Error, try again',
+              message: correctAnswer ?? StringManager.errorMsg,
               duration: ToastDuration.long,
               gravity: ToastGravity.center,
               backgroundColor: Palette.orange,
-              textColor: Colors.white,
-              fontSize: 16.0,
+              textColor: Palette.white,
+              fontSize: FontSize.s16,
             );
           },
           child: Container(
-            height: 60,
-            margin: const EdgeInsets.symmetric(vertical: 5),
+            height: AppSize.s60,
+            margin: const EdgeInsets.symmetric(vertical: AppMargin.m5),
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20,
+             vertical: AppPadding.p10),
             decoration: BoxDecoration(
               color:
                   isSelected ? Palette.bgButton.withOpacity(0.5) : btnBgColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppMargin.m8),
             ),
             child: Text(
               option.answer ?? '',
               style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16.5,
-                color: Colors.white,
+                fontWeight: FontWeightManager.medium,
+                fontSize: FontSize.s16,
+                color: Palette.white,
               ),
             ),
           ),

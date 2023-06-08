@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizlr_tiktok_clone/core/constants/palette.dart';
+import 'package:quizlr_tiktok_clone/core/resources/font_manager.dart';
+import 'package:quizlr_tiktok_clone/core/resources/values_manager.dart';
 
 class LeftPanel extends StatelessWidget {
   const LeftPanel({
@@ -24,18 +27,18 @@ class LeftPanel extends StatelessWidget {
           Text(
             name,
             style: const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
+                color: Palette.white, fontSize: FontSize.s16, fontWeight: FontWeightManager.regular),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppPadding.p4),
           Text(
             content,
             style: const TextStyle(
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeightManager.regular,
               color: Colors.white,
-              fontSize: 14,
+              fontSize: FontSize.s14,
             ),
           ),
-          const SizedBox(height: 25,)
+          const SizedBox(height: AppMargin.m25,)
         ],
       ),
     );
