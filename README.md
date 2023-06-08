@@ -3,7 +3,7 @@
 This project will consist of five screens. You don't have to create a shoe store, you can use any other item as long as you create the following screens. You will be creating:
 
 |Login|Onboarding|Instruction screen 1| Instruction screen 2                                                                                      |
-|---|---|-----------------------------------------------------------------------------------------------------------|
+|---|---|---|-----------------------------------------------------------------------------------------------------------|
 |![Following](screenshots/following.png)|![For You](screenshots/for_you.png)|![Answer](screenshots/answer.png)|
 
 
