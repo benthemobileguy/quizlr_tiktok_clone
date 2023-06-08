@@ -12,7 +12,7 @@
 
 2. Displaying two types of content: Flashcards and Multiple Choice Questions (MCQs)
 
-3.Showing the content’s user name,  user icon, and content description
+3. Showing the content’s user name,  user icon, and content description
 
 4. Browsing through content in an infinite scroll fashion (like TikTok)
 
