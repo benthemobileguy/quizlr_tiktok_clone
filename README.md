@@ -4,7 +4,7 @@ This project will consist of five screens. You don't have to create a shoe store
 
 |Login|Onboarding|Instruction screen 1| Instruction screen 2                                                                                      |Shoe detail|Shoes list|
 |---|---|---|-----------------------------------------------------------------------------------------------------------|---|---|
-|![Following](../screenshots/home.png)|![For You](../screenshots/slide1.png)|![Answer](../screenshots/slide2.png)|
+|![Following](screenshots/home.png)|![For You](screenshots/slide1.png)|![Answer](screenshots/slide2.png)|
 
 
 1. Login screen: Email and password fields and labels plus create and login buttons
