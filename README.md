@@ -6,7 +6,7 @@
 |---|---|-----------------------------------------------------------------------------------------------------------|
 |![Following](screenshots/following.png)|![For You](screenshots/for_you.png)|![Answer](screenshots/answer.png)|
 
-##Features
+## Features
 
 1. Showing content for the “Following” and “For you” sections of the “Home” screen
 
