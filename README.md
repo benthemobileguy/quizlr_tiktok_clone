@@ -33,4 +33,4 @@ https://github.com/benthemobileguy/quizlr_tiktok_clone/assets/26816781/36951f51-
 
 2. Open the starter project in any supported IDE of your choice.
 
-3. Run flutter pub get && flutter run
+3. Run: flutter pub get && flutter run
